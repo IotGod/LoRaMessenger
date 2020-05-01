@@ -15,10 +15,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val longitude = findViewById<EditText>(R.id.enterLong)
         val latitude = findViewById<EditText>(R.id.enterLat)
-        val mnc = findViewById<EditText>(R.id.enterMNC)
+        val longitude = findViewById<EditText>(R.id.enterLong)
         val mcc = findViewById<EditText>(R.id.enterMCC)
+        val mnc = findViewById<EditText>(R.id.enterMNC)
         val lcl = findViewById<EditText>(R.id.enterLAC)
         val cellID = findViewById<EditText>(R.id.enterCellID)
 
@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
 
             //message example is tempUp
             messenger.sendLoRaMessage("measure/add", parameters )
-
         }
 
     }
