@@ -4,7 +4,7 @@
 Table of contents:
 
 
-#### [How to import the Lora Messenger library](##Import-the-Lora-Messenger-library) 
+#### [How to import the Lora Messenger library](#Import-the-Lora-Messenger-library) 
 
 #### [How to add the encoding table to the Assets folder](#Add-the-encoding-table-to-the-Assets-folder)   
 
