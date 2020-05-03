@@ -32,9 +32,9 @@ Ryan
 ## How to add the encoding table to the Assets folder: - Ryan
 
 ## How to create an Assets folder inside of your application:
-In order to let your Android application read files you need to have an assets folder. If you don’t have one you need to create it in order to add the encoding table file. This folder can be created by the following steps: \
-1) Navigate to your application/project directory \
-2) Right-click on your application folder \
+In order to let your Android application read files you need to have an assets folder. If you don’t have one you need to create it in order to add the encoding table file. This folder can be created by the following steps: 
+1) Navigate to your application/project directory 
+2) Right-click on your application folder 
 3) From the drop down list, choose New > Folder > Assets Folder
 
 ## How to read the encoding table from the Assets folder:
