@@ -11,8 +11,6 @@ Table of contents:
 
 #### [How to read the encoding table from the Assets folder](#How-to-read-the-encoding-table-from-the-Assets-folder)  
  
-
-# Functions
 #### [The encodingMessage function](#The-encodingMessage-function)  
 
 #### [The forwardMessage function](#The-forwardMessage-function)  
