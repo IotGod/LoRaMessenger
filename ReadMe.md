@@ -3,255 +3,111 @@
 
 Table of contents:
 
-[How to import the Lora Messenger library](#import-the-Lora-Messenger-library)  
+# General Instructions 
 
-[How to add the encoding table](#Encoding-Files)  
+#### [How to import the Lora Messenger library](##import-the-Lora-Messenger-library) 
 
-[How to create an Assets folder inside of your application](#Decoding-Files)  
+#### [How to add the encoding table to the Assets folder](#How-to-add-the-encoding-table-to-the-Assets-folder)   
 
-[How to read the encoding table from the Assets folder](#Decoding-Files)  
+#### [How to create an Assets folder inside of your application](#How-to-create-an-Assets-folder-inside-of-your-application)  
 
-[How to create an Assets folder inside of your application](#Decoding-Files)  
+#### [How to read the encoding table from the Assets folder](#How-to-read-the-encoding-table-from-the-Assets-folder)  
+ 
 
-[How to create an Assets folder inside of your application](#Decoding-Files)  
+# Functions
+#### [The encodingMessage function](#The-encodingMessage-function)  
 
-# General-Instructions
+#### [The forwardMessage function](#The-forwardMessage-function)  
 
-## import the Lora Messenger library
+#### [The sendLoraMessage function](#The-sendLoraMessage-function)  
 
-## How-to-add the encoding table to the Assets folder
+
+
+# General Instructions
+
+# import the Lora Messenger library:
+Ryan
+
+
+## How to add the encoding table to the Assets folder: - Ryan
 
 ## How to create an Assets folder inside of your application:
+In order to let your Android application read files you need to have an assets folder. If you don’t have one you need to create it in order to add the encoding table file. This folder can be created by the following steps: \
+1) Navigate to your application/project directory \
+2) Right-click on your application folder \
+3) From the drop down list, choose New > Folder > Assets Folder
 
 ## How to read the encoding table from the Assets folder:
-
-
-# Input-Files  
-
-The LoRaMessenger configuration service must be given a JSON file as input. The
-format of this JSON file is described below.  
-
-First create a dictionary where the keys are the names of the applications you
-wish to use with LoRaMessenger. These keys should point to dictionaries which
-have the following content:
-- url : The address you would like you application to send data to.
-- api : A dictionary where the keys are the names of the APIs you wish to use
-        with LoRaMessenger. These keys should point to dictionaries which have
-        the following contents:   
-    * Parameter-name : A key which points to a list in one of the two following
-                      formats:
-        * If the parameter accepts an arbitrary integer or double, specify
-          "int-param" or "double-param" at list index 0. At list index 1, specify
-          the number of bytes you would like to dedicate to storing this
-          parameter's value. Keep in mind that a single LoRaMessenger packet
-          has only 10 bytes of payload space.
-        * If the parameter has a concise list of valid inputs ( less than 256 )
-          you can place all the values you would like to be able to pass for this
-          parameter in a list.
-
-Below is an example of an input file (this can also be found in the examples folder)
-``` JSON
-{
-    "TempControl" : {
-        "url" : "TempControl.com",
-        "tempUp" : { "increaseAmount" : [ "int-param", "2" ], "room" : [ "Living Room", "Dining Room", "Kitchen", "Bedroom", "Garage"] },
-        "tempDown" : { "decreaseAmount" : [ "int-param", "2" ], "room" : [ "Living Room", "Dining Room", "Kitchen", "Bedroom", "Garage"] }
-    },
-    "LightControl" : {
-        "url" : "LightControl.com",
-        "on" : { "intensity" : [ "int-param", "2" ], "room" : [ "Living Room", "Dining Room", "Kitchen", "Bedroom", "Garage"] },
-        "off" : { "room" : [ "Living Room", "Dining Room", "Kitchen", "Bedroom", "Garage"] }
-    }
-}
+After the encoding table file is added to the Assets folder, your application needs to read the file in order to encode the message. The following code snippet will let your application read the encoding table file from the assets folder.
+```
+val jsonString: String =
+                application.assets.open("encoding_table.json").bufferedReader().use {
+                    it.readText()
+                }
 ```
 
-# Encoding-Files
-If everything went well, the encoding file should look like this:
 
-``` JSON
-{
 
-  "TempControl" : {
-    "byte_code" : "1",
+# Functions
 
-    "tempUp" : {
-      "byte_code" : "1",
-      "params" : [
-        {
-          "name" : "increaseAmount",
-          "values" : "int-param",
-          "length" : "2"
-        },
-        {
-          "name" : "room",
-          "values" : {
-            "Living Room" : "1",
-            "Dining Room" : "2",
-            "Kitchen" : "3",
-            "Bedroom" : "4",
-            "Garage" : "5"
-          }
-        }
-      ]
-    },
+## The encodingMessage function 
 
-    "tempDown" : {
-      "byte_code" : "2",
-      "params" : [
-        {
-          "name" : "increaseAmount",
-          "values" : "int-param",
-          "length" : "2"
-        },
-        {
-          "name" : "room",
-          "values" : {
-            "Living Room" : "1",
-            "Dining Room" : "2",
-            "Kitchen" : "3",
-            "Bedroom" : "4",
-            "Garage" : "5"
-          }
-        }
-      ]
-    }
-  },
+#### What does it do: 
+The encoded message function will look up the passed parameter in the encoding table and find the corresponding byte to that parameter and replace it with the parameter that was passed in the first place.
 
-  "LightControl" : {
-    "byte_code" : "2",
+#### What does it take (parameters):
+The parameters that the encoding message function needs to take are:
+* ApiName: The name of the API that are chosen to execute.
+* Parameter: The actual message components assigned to an array that are passed from the application to the loRa Messenger library in order to encode it.
 
-    "on" : {
-      "byte_code" : "1",
-      "params" : [
-        {
-          "name" : "intensity",
-          "values" : "int-param",
-          "length" : "2"
-        },
-        {
-          "name" : "room",
-          "values" : {
-            "Living Room" : "1",
-            "Dining Room" : "2",
-            "Kitchen" : "3",
-            "Bedroom" : "4",
-            "Garage" : "5"
-          }
-        }
-      ]
-    },
+#### What does it return:
+It returns the encoded message in a byte code form.
 
-    "off" : {
-      "byte_code" : "2",
-      "params" : {
-        "name" : "room",
-        "values" : {
-          "Living Room" : "1",
-          "Dining Room" : "2",
-          "Kitchen" : "3",
-          "Bedroom" : "4",
-          "Garage" : "5"
-        }
-      }
-    }
-  }
 
-}
+
+## The forwardMessage function 
+
+#### What does it do: 
+The forward message function is responsible for fragmenting the encoded message into smaller bytes and assigning the fragmented message to a packet stream. The function also assigns the packet stream to the device’s IP address which is where the messages will be received.
+
+#### What does it take (parameters):
+The only parameter that the forward message function takes is the encoded message after it got passed from the encoding message function.
+
+#### How to initialize the socket’s IP address in the forwardMessage function:
+The initialization of the IP address in the socket is very similar to assigning values in a regular array….(TO DO)
+
+#### What does it return:
+The forward message function returns the fragmented message and sets it to a specific IP address to be sent over the network.
+
+
+##### Note: 
+Prior to sending a packet stream, the forward Message function sends a 4 byte header which includes the total number of bytes expected to be in the message. Due to the constraints of LoRaWAN, messages are sent in 13 byte packets. The packets are constructed as follows:
+
+
+* 2 bytes that form a unique id for the message as a whole
+* 1 byte that is a combination of two nibbles that store information for the packet’s number and the total packets expected for the message. For example, if a message were to require 3 packets to be sent, the 3rd bytes of these 3 packets (in order) would be:
+``` 
+000 0011	0001 0011	0010 0011
+ 3		   19		   35
 ```
-This file should be placed in the Android assests folder
+
+* Up to 10 bytes of actual message data. This is a stream of the encoded parameters, taking up a number of bytes and in the order defined in the encoding table. 
+  * The first byte of this stream is always a combination of two nibbles that store information on which app and api this message is for, as defined by the encoding table.
+
+## The sendLoraMessage function
+Ryan
+  #### What does it do: 
+  
+
+  #### What does it take (parameters):
+  
+
+  #### What does it return:
+  
 
 
-# Decoding-Files
-If all went well then the decoding file should look like this:
 
-``` JSON
-{
+\
+\
+\
 
-  "1" : {
-    "url" : "TempControl.com",
-
-    "1" : {
-      "name" : "tempUp",
-      "params" : [
-        {
-          "name" : "increaseAmount",
-          "values" : "int-param",
-          "length" : "2"
-        },
-        {
-          "name" : "room",
-          "values" : {
-            "1" : "Living Room",
-            "2" : "Dining Room",
-            "3" : "Kitchen",
-            "4" : "Bedroom",
-            "5" : "Garage"
-          }
-        }
-      ]
-    },
-
-    "2" : {
-      "name" : "tempDown",
-      "params" : [
-        {
-          "name" : "increaseAmount",
-          "values" : "int-param",
-          "length" : "2"
-        },
-        {
-          "name" : "room",
-          "values" : {
-            "1" : "Living Room",
-            "2" : "Dining Room",
-            "3" : "Kitchen",
-            "4" : "Bedroom",
-            "5" : "Garage"
-          }
-        }
-      ]
-    }
-
-  },
-
-  "2" : {
-    "url" : "LightControl.com",
-
-    "1" : {
-      "name" : "on",
-      "params" : [
-        {
-          "name" : "intensity",
-          "values" : "int-param"
-        },
-        {
-          "name" : "room",
-          "values" : {
-            "1" : "Living Room",
-            "2" : "Dining Room",
-            "3" : "Kitchen",
-            "4" : "Bedroom",
-            "5" : "Garage"
-          }
-        }
-      ]
-    },
-
-    "2" : {
-      "name" : "off",
-      "params" : {
-        "name" : "room",
-        "values" : {
-          "1" : "Living Room",
-          "2" : "Dining Room",
-          "3" : "Kitchen",
-          "4" : "Bedroom",
-          "5" : "Garage"
-        }
-      }
-    }
-
-  }
-
-}
-```
