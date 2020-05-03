@@ -3,8 +3,6 @@
 
 Table of contents:
 
-# General Instructions 
-
 #### [How to import the Lora Messenger library](#import-the-Lora-Messenger-library) 
 
 #### [How to add the encoding table to the Assets folder](#How-to-add-the-encoding-table-to-the-Assets-folder)   
