@@ -3,7 +3,7 @@
 
 Table of contents:
 
-[How to import the Lora Messenger library](#General-Instructions)  
+[How to import the Lora Messenger library](#import-the-Lora-Messenger-library)  
 
 [How to add the encoding table](#Encoding-Files)  
 
