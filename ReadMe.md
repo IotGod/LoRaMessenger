@@ -1,12 +1,29 @@
-# Using the LoRaMessenge Configuration Service
+# Using LoRa Messenger Library
+
 
 Table of contents:
 
-[How to Format an Input File](#Input-Files)  
+[How to import the Lora Messenger library](## How to import the Lora Messenger library)  
 
-[How an Encoding File Should Look](#Encoding-Files)  
+[How to add the encoding table](#Encoding-Files)  
 
-[How a Decoding File Should Look](#Decoding-Files)  
+[How to create an Assets folder inside of your application](#Decoding-Files)  
+
+[How to read the encoding table from the Assets folder](#Decoding-Files)  
+
+[How to create an Assets folder inside of your application](#Decoding-Files)  
+
+[How to create an Assets folder inside of your application](#Decoding-Files)  
+
+# General Instructions - Lora Messenger Library
+
+## How to import the Lora Messenger library
+
+## How to add the encoding table to the Assets folder
+
+## How to create an Assets folder inside of your application:
+
+## How to read the encoding table from the Assets folder:
 
 
 # Input-Files  
