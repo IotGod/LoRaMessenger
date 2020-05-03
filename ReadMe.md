@@ -87,7 +87,7 @@ Prior to sending a packet stream, the forward Message function sends a 4 byte he
 * 1 byte that is a combination of two nibbles that store information for the packet’s number and the total packets expected for the message. For example, if a message were to require 3 packets to be sent, the 3rd bytes of these 3 packets (in order) would be:
 ``` 
 000 0011	0001 0011	0010 0011
- 3		19		35
+3		19		35
 ```
 
 * Up to 10 bytes of actual message data. This is a stream of the encoded parameters, taking up a number of bytes and in the order defined in the encoding table. 
