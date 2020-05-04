@@ -31,10 +31,10 @@ Ryan
 Ryan
 
 ## Create an Assets folder inside of your application:
-In order to let your Android application read files you need to have an assets folder. If you don’t have one you need to create it in order to add the encoding table file. This folder can be created by the following steps: 
+In order to let your Android application read files, you need to have an assets folder. If you don’t have one you need to create it in order to add the encoding table file. This folder can be created by the following steps: 
 1) Navigate to your application/project directory 
 2) Right-click on your application folder 
-3) From the drop down list, choose New > Folder > Assets Folder
+3) From the drop-down list, choose New > Folder > Assets Folder
 
 ## Read the encoding table from the Assets folder:
 After the encoding table file is added to the Assets folder, your application needs to read the file in order to encode the message. The following code snippet will let your application read the encoding table file from the assets folder.
@@ -56,8 +56,8 @@ The encoded message function will look up the passed parameter in the encoding t
 
 #### What does it take (parameters):
 The parameters that the encoding message function needs to take are:
-* ApiName: The name of the API that are chosen to execute.
-* Parameter: The actual message components assigned to an array that are passed from the application to the loRa Messenger library in order to encode it.
+* ApiName: The name of the API that is chosen to execute.
+* Parameter: The actual message components assigned to an array that is passed from the application to the Lora Messenger library in order to encode it.
 
 #### What does it return:
 It returns the encoded message in a byte code form.
