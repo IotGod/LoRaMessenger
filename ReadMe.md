@@ -1,4 +1,4 @@
-# Using LoRa Messenger Library
+# Using The LoRa Messenger Library
 
 
 Table of contents:
@@ -103,10 +103,4 @@ Ryan
 
   #### What does it return:
   
-
-
-
-\
-\
-\
 
